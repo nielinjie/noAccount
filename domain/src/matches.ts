@@ -7,7 +7,7 @@ export function propertyIs<T, V>(
   value: V
 ): (value: T) => boolean {
   return function (v) {
-    return v[propertyName] == value;
+    return (v as any)[propertyName]  == value;
   };
 }
 

@@ -4,7 +4,10 @@ export interface Repository {
 }
 
 export class MemoryRepository implements Repository {
-  private records = [];
+  private records:any[] = [];
+//   private projects = [];
+//   private accounts = [];
+//   private adjustments = [];
   getRecords(): Record[] {
     return this.records;
   }

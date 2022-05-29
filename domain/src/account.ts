@@ -1,10 +1,5 @@
-export class Account {
-  name: string;
-  id: string;
-}
-export class Category {
-  name: string;
-  id: string;
-}
+import { Tree, TreeNode } from "./tree";
 
-export class Change{}
+export class Account extends TreeNode {}
+
+export class Accounts extends Tree<Account> {}
