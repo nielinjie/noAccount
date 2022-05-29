@@ -1,4 +1,3 @@
-import { notImplementedError } from "./util";
 
 export class Currently {
   code: string;

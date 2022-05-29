@@ -1,4 +1,4 @@
-import { notImplementedError } from "./util";
+import { notImplementedError } from "../util";
 
 export interface Value {}
 export class NEValue implements Value {
