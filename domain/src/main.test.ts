@@ -1,8 +1,9 @@
+import { DiffAmount } from "./amount";
 import { App } from "./app";
-import { Amount, ExactAmount } from "./currency";
-import { Project, Projects } from "./project";
+import { Projects } from "./project";
 import { SeqRecord } from "./record";
 import { MemoryRepository } from "./repository";
+import { ExactValue } from "./value";
 
 let app: App;
 beforeAll(() => {
@@ -17,5 +18,5 @@ test("income project", () => {
   let income = new SeqRecord();
   income.duration = "M";
   income.start = new Date();
-  income.amount = new ExactAmount("rmb", 10000);
+  income.amount = new DiffAmount(new ExactValue("rmb", 10000));
 });

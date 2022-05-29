@@ -1,4 +1,5 @@
-import { Amount } from "./currency";
+import { Amount } from "./amount";
+import { Value } from "./value";
 
 export class Record {
   type: string;
@@ -20,11 +21,8 @@ export class SeqRecord {
 export class PointRecord {} //一个点的记录
 
 
-export class DiffAmount {} //增量
-export class SumAmount {} // 存量
-export class Approx {
-  value: number;
-}
 
+
+type Approx = number;
 
 export class Change {}
