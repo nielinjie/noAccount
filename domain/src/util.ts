@@ -1,3 +1,5 @@
-export function notImplementedError(){
-    return new Error("Not Implemented")
-};
+export function notImplementedError() {
+  return new Error("Not Implemented");
+}
+
+
