@@ -94,5 +94,5 @@ TODO， 但这个问题往往不是单一的project，我的钱够不够是指�
 flowchart TB
     View --- ProjectView
     View --- AccountView
-    View --- AnyView
+    View --- AnyOtherView
 ```
