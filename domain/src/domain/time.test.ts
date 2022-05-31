@@ -1,24 +1,16 @@
+import cuid from "cuid";
 import { DiffAmount, SumAmount } from "./amount";
 import { App } from "./app";
 import { PointRecord, SeqRecord } from "./record";
-import { MemoryRepository } from "./repository";
-import { daysAfter, monthsAfter, pointSetOnTimeLine, TimeLine, TimeLinePoint } from "./time";
+import { testApp } from "./testUtil";
+import { daysAfter, monthsAfter, pointSetOnTimeLine, TimeLinePoint } from "./time";
 import { ExactValue } from "./value";
 
 
 let app: App;
 beforeAll(() => {
-    let repository = new MemoryRepository();
-    app = {
-        repository,
-        timeLine: (() => {
-            const re = new TimeLine();
-            re.repository = repository;
-            return re;
-        })()
-    };
+    app = testApp();
 });
-
 
 
 test("timeLine", () => {
@@ -53,7 +45,7 @@ test("timeline with extra", () => {
     const points = income.spread(monthsAfter(2, now))
     expect(points.length).not.toEqual(0)
 
-    let extra = new PointRecord(yesterday, new DiffAmount(new ExactValue("rmb", 10000)))
+    let extra = new PointRecord(cuid(),yesterday, new DiffAmount(new ExactValue("rmb", 10000)))
 
 
     let timeLinePoints = pointSetOnTimeLine(undefined, [...points, extra])
@@ -71,7 +63,7 @@ test("timeline with a hard setting", () => {
     const points = income.spread(monthsAfter(2, now))
     expect(points.length).not.toEqual(0)
 
-    let extra = new PointRecord(yesterday, new SumAmount(new ExactValue("rmb", 10000)))
+    let extra = new PointRecord(cuid(),yesterday, new SumAmount(new ExactValue("rmb", 10000)))
 
 
     let timeLinePoints = pointSetOnTimeLine(undefined, [...points, extra])

@@ -4,12 +4,14 @@ export interface View {
   filter(record: Record): boolean;
 }
 export class ProjectView implements View {
-  ;
+  //TODO 增加迭代的逻辑，project及其children的逻辑。
   constructor(public project: Project) {
 
   }
   filter(record: Record): boolean {
-    return this.project.records.includes(record.id)
+    let re = this.project.records.includes(record.id)
+
+    return re
   }
 }
 // export class AccountView implements View {

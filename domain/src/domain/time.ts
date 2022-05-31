@@ -1,6 +1,7 @@
 import { add, compareAsc, sub } from "date-fns";
 import { notImplementedError } from "../util";
 import { Amount } from "./amount";
+import { Records } from "./record";
 import { Repository } from "./repository";
 import { ExactValue, Value } from "./value";
 
@@ -10,7 +11,7 @@ export class TimeLine {
     //end： Date｜undefined
     start: Date;
     end: Date;
-    repository: Repository
+    records: Records;
     getPoints(): TimeLinePoint[] {
         throw notImplementedError();
     }

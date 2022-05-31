@@ -1,21 +1,12 @@
 import { App } from "./app";
-import { MemoryRepository, Repository } from "./repository";
-import { TimeLine } from "./time";
+import { testApp } from "./testUtil";
 
 let app: App;
 beforeAll(() => {
-  let repository = new MemoryRepository();
-  app = {
-    repository,
-    timeLine: (() => {
-      const re = new TimeLine();
-      re.repository = repository;
-      return re;
-    })()
-  };
+  app = testApp();
 });
 
 test("records", () => {
-  const res = app.repository.getRecords();
+  const res = app.records.records;
   expect(res).toBeDefined();
 });

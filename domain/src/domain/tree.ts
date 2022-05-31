@@ -24,11 +24,13 @@ export class Tree<T extends TreeNode> implements Tree<T> {
   getParent(node: T): T | undefined {
     return this.get(node.parent);
   }
-  add(node: T, parent: T | undefined = undefined): void {
+  add(node: T, parent: T | undefined = undefined): T {
     if (parent) {
       node.parent = parent.id;
     }
     this.nodes.push(node);
+    return node
   }
+  
 }
 type NodeId = string;

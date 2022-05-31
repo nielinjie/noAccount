@@ -1,16 +1,17 @@
+import cuid from "cuid";
 import { eachMonthOfInterval } from "date-fns";
 import { Amount } from "./amount";
 export type Id = string
 export class Record {
   type: string;
-  dateTime: number;
+  dateTime: Date;
   id: Id;
   data: any;
   user: string; //预留合作模式
   // project: string
 }
 
-export class SeqRecord {
+export class SeqRecord extends Record{
   interval: string;
   start: Date;
   end: Date | undefined;
@@ -38,14 +39,25 @@ export class SpreadPoint {
 }
 
 
-export class PointRecord {
+export class PointRecord extends Record{
   constructor(
+  
+    public id:Id,
     public dateTime: Date,
-    public amount: Amount) { }
+    public amount: Amount) { super()}
 } //一个点的记录
 
 
-
+export class Records{
+  records:Record[] = [];
+  add(record:Record):Record{
+    if(record.id ===undefined){
+      record.id = cuid()
+    }
+    this.records.push(record);
+    return record
+  }
+}
 
 type Approx = number;
 
