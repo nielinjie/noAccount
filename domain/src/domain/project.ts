@@ -1,7 +1,8 @@
 import { Tree, TreeNode } from "./tree";
 import cuid from "cuid";
-import { RecordReference } from "./record";
-export class Project extends TreeNode , RecordReference{
+import { Id,  } from "./record";
+export class Project extends TreeNode {
+  records:Id[]
 
 }
 export class Projects extends Tree<Project> {

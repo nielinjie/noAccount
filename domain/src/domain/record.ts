@@ -1,6 +1,6 @@
 import { eachMonthOfInterval } from "date-fns";
 import { Amount } from "./amount";
-type Id = string
+export type Id = string
 export class Record {
   type: string;
   dateTime: number;
@@ -54,8 +54,4 @@ export class Change { }
 
 export interface RecordReference {
   records: Id[]
-}
-export class RangeReference implements RecordReference {
-  records: Id[]
-
 }
