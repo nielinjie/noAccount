@@ -6,7 +6,6 @@ import { TimeLine } from "./time";
 import { Views } from "./view";
 
 export function testApp(): App {
-    // let repository = new MemoryRepository();
     let projects = new Projects();
     return ({
         // repository,

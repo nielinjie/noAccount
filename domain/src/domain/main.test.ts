@@ -1,23 +1,22 @@
-import { DiffAmount } from "./amount";
 import { App } from "./app";
-import { Projects } from "./project";
-import { SeqRecord } from "./record";
-import { MemoryRepository } from "./repository";
+import { projectAndRecord } from "./project.test";
 import { testApp } from "./testUtil";
-import { TimeLine } from "./time";
-import { ExactValue } from "./value";
+import { Views } from "./view";
 
 let app: App;
 beforeAll(() => {
   app = testApp();
 });
 
-test("income project", () => {
-  let projects = new Projects();
-  let incomeProject = projects.fromName("main income",projects.getRoot().id);
-  let income = new SeqRecord();
-  income.interval = "M";
-  income.start = new Date();
-  income.amount = new DiffAmount(new ExactValue("rmb", 10000));
+test("first case", () => {
+  //已持有状态
+  projectAndRecord(app.projects, app.records)
+  //选出一个project，默认是root，也就是universal
+  let project = app.projects.getRoot()
+  //生成这个view
+  let universalView = app.views.projectView(project.id)
+
+  universalView.filter
+  //查看这个view的内容。
 });
 
