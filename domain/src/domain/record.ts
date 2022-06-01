@@ -1,5 +1,6 @@
 import cuid from "cuid";
 import { eachMonthOfInterval } from "date-fns";
+import { Constructor } from "../util";
 import { Amount } from "./amount";
 export type Id = string
 export class Record {
@@ -8,10 +9,9 @@ export class Record {
   id: Id;
   data: any;
   user: string; //预留合作模式
-  // project: string
 }
 
-export class SeqRecord extends Record{
+export class SeqRecord extends Record {
   interval: string;
   start: Date;
   end: Date | undefined;
@@ -21,7 +21,6 @@ export class SeqRecord extends Record{
   approx: Approx;
 
   spread(end: Date): SpreadPoint[] {
-    // throw notImplementedError()
     let interval = { start: this.start, end };
     if (this.interval === 'M') {
       let months = eachMonthOfInterval(interval)
@@ -39,19 +38,19 @@ export class SpreadPoint {
 }
 
 
-export class PointRecord extends Record{
+export class PointRecord extends Record {
   constructor(
-  
-    public id:Id,
+
+    public id: Id,
     public dateTime: Date,
-    public amount: Amount) { super()}
+    public amount: Amount) { super() }
 } //一个点的记录
 
 
-export class Records{
-  records:Record[] = [];
-  add(record:Record):Record{
-    if(record.id ===undefined){
+export class Records {
+  records: Record[] = [];
+  add(record: Record): Record {
+    if (record.id === undefined) {
       record.id = cuid()
     }
     this.records.push(record);
@@ -66,4 +65,15 @@ export class Change { }
 
 export interface RecordReference {
   records: Id[]
+  linkRecord(recordId: Id): void
+}
+export function makeRecordReference<T extends Constructor<{}>>(Base: T) {
+  return class extends Base {
+    records: Id[] = [];
+    linkRecord(record: Id) {
+      if (!this.records.includes(record)) {
+        this.records.push(record)
+      }
+    }
+  }
 }

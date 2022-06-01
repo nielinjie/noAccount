@@ -3,3 +3,9 @@ export function notImplementedError() {
 }
 
 
+export function overrideMe() {
+    return new Error("Override me");
+}
+
+
+export type Constructor<T> = new (...args: any[]) => T;
