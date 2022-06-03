@@ -7,6 +7,6 @@ beforeAll(() => {
 });
 
 test("records", () => {
-  const res = app.records.records;
+  const res = app.records.getItems();
   expect(res).toBeDefined();
 });

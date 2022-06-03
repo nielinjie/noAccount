@@ -6,17 +6,20 @@ import { TimeLine } from "./time";
 import { Views } from "./view";
 
 export function testApp(): App {
-    // let repository = new MemoryRepository();
     let projects = new Projects();
-    return ({
+    let records = new Records()
+
+    return({
         // repository,
         timeLine: (() => {
             const re = new TimeLine();
             return re;
         })(),
         projects,
-        views:new Views(projects),
-        records: new Records(),
-        accounts:new Accounts()
+        accounts: new Accounts(),
+        records,
+        views: new Views(projects, records),
     });
+
+
 }

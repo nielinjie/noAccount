@@ -2,7 +2,7 @@ import cuid from "cuid";
 import { eachMonthOfInterval } from "date-fns";
 import { Constructor } from "../util";
 import { Amount } from "./amount";
-export type Id = string
+import { Id, Repository,  } from "./repository";
 export class Record {
   type: string;
   dateTime: Date;
@@ -47,15 +47,8 @@ export class PointRecord extends Record {
 } //一个点的记录
 
 
-export class Records {
-  records: Record[] = [];
-  add(record: Record): Record {
-    if (record.id === undefined) {
-      record.id = cuid()
-    }
-    this.records.push(record);
-    return record
-  }
+export class Records extends Repository<Record>{
+  
 }
 
 type Approx = number;

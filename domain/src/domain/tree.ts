@@ -1,29 +1,33 @@
 import cuid from "cuid";
 import { Constructor } from "../util";
+import { Repository, WithId } from "./repository";
 
-export interface TreeNode {
+export interface TreeNode extends WithId{
   parent: NodeId | undefined;
-  id: NodeId;
 }
 export class TreeNode implements TreeNode {
   name: string;
   id: string;
   parent: string | undefined;
 }
-// export interface Tree<T extends TreeNode> { }
+export interface Tree<T extends TreeNode> { 
+  itemConstructor(): Constructor<T>
 
-export class Tree<T extends TreeNode> implements Tree<T> {
-  itemConstructor: Constructor<T>
-  nodes: T[];
+}
+
+export class Tree<T extends TreeNode> extends Repository<T> implements Tree<T>{
+  constructor(items:T[]=[]){super(items);
+    this.ensureRoot()
+  }
   getRoot(): T {
-    return this.nodes.find((n) => n.parent === undefined)!;
+    return this.items.find((n) => n.parent === undefined)!;
   }
   getChildren(node: T): T[] {
-    return this.nodes.filter((n) => n.parent === node.id);
+    return this.items.filter((n) => n.parent === node.id);
   }
   get(id: NodeId | undefined): T | undefined {
     if (id === undefined) return undefined;
-    return this.nodes.find((n) => n.id === id);
+    return this.items.find((n) => n.id === id);
   }
   getParent(node: T): T | undefined {
     return this.get(node.parent);
@@ -32,7 +36,7 @@ export class Tree<T extends TreeNode> implements Tree<T> {
     if (parent) {
       node.parent = parent.id;
     }
-    this.nodes.push(node);
+    this.items.push(node);
     return node
   }
    ensureRoot() {
@@ -41,7 +45,7 @@ export class Tree<T extends TreeNode> implements Tree<T> {
     }
   }
   fromProperties(properties: any, parent: NodeId): T {
-    let re = new this.itemConstructor();
+    let re = new (this.itemConstructor())();
     re = Object.assign(re, properties);
     re.id = cuid();
     let p: NodeId | undefined = parent

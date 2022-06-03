@@ -4,7 +4,7 @@ import { Project, Projects } from "./project";
 import { PointRecord, Records } from "./record";
 import { daysAfter } from "./time";
 import { ExactValue } from "./value";
-import {Record } from "./record";
+import { Record } from "./record";
 test("as tree", () => {
   let projects = new Projects();
   let root = projects.getRoot();
@@ -35,13 +35,13 @@ test("project and records", () => {
 })
 
 export function incomeProject(projects: Projects): Project {
-  let existed = projects.nodes.find(node => node.name === "incomeProject")
+  let existed = projects.items.find(node => node.name === "incomeProject")
   if (existed !== undefined) return existed;
   let c = projects.add(projects.fromName("incomeProject"));
   return c;
 }
 
-export function projectAndRecord(projects: Projects,records:Records): [Project, Record[]] {
+export function projectAndRecord(projects: Projects, records: Records): [Project, Record[]] {
   const now = new Date('2022-06-30T16:00:00.000Z')
   const yesterday = daysAfter(-1, now)
   let c = incomeProject(projects)

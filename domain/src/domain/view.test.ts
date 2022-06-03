@@ -10,7 +10,7 @@ test("views", () => {
     let [p, rs] = projectAndRecord(app.projects, app.records)
     let views = app.views;
     let view = views.projectView(p.id);
-    let recordArray = app.records.records.filter(r => view.filter(r))
+    let recordArray = app.records.getItems().filter(r => view.filter(r))
     expect(recordArray).toEqual(expect.arrayContaining([matchValue(10000)]))
 })
 

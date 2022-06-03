@@ -1,10 +1,9 @@
 import { DiffAmount } from "./amount";
 import { App } from "./app";
 import { Projects } from "./project";
+import { projectAndRecord } from "./project.test";
 import { SeqRecord } from "./record";
-import { MemoryRepository } from "./repository";
 import { testApp } from "./testUtil";
-import { TimeLine } from "./time";
 import { ExactValue } from "./value";
 
 let app: App;
@@ -21,3 +20,9 @@ test("income project", () => {
   income.amount = new DiffAmount(new ExactValue("rmb", 10000));
 });
 
+test("first question", () => {
+  let [p,rs ]= projectAndRecord(app.projects,app.records)
+ let views =app.views
+ const projectView =views.projectView(p.id)
+ 
+})
