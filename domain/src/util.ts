@@ -1,5 +1,5 @@
-export function notImplementedError() {
-  return new Error("Not Implemented");
+export function notImplementedError(message: string = "") {
+  return new Error(`Not Implemented ${message}`);
 }
 
 

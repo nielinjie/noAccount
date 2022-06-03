@@ -61,7 +61,7 @@ export interface RecordReference {
   linkRecord(recordId: Id): void
 }
 export function makeRecordReference<T extends Constructor<{}>>(Base: T) {
-  return class extends Base {
+  return class  extends Base {
     records: Id[] = [];
     linkRecord(record: Id) {
       if (!this.records.includes(record)) {
